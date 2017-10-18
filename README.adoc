@@ -1,3 +1,11 @@
+The deployed application is available at link:https://tg2b-7.herokuapp.com/greeting
+
+image:https://travis-ci.org/sweIhm/sweiproject-tg2b-7.svg?branch=master["Build Status", link="https://travis-ci.org/sweIhm/sweiproject-tg2b-7"]
+
+
+
+== This is the original part of Documentation
+
 ---
 tags: [rest]
 projects: [spring-framework]
