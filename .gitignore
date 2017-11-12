@@ -204,3 +204,7 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 # End of https://www.gitignore.io/api/java,maven,gradle,eclipse,netbeans,intellij,microsoftoffice
+
+
+.idea/
+gs-rest-service.iml
