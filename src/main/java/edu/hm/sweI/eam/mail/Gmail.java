@@ -9,7 +9,15 @@ import java.util.Properties;
 
 public class Gmail {
 
+    private String username;
+    private String password;
+
     public Gmail(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public void send(){
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -42,6 +50,5 @@ public class Gmail {
             throw new RuntimeException(e);
         }
     }
-
 }
 
