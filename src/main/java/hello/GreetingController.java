@@ -15,16 +15,4 @@ public class GreetingController {
         return new Greeting(counter.incrementAndGet(),
                 String.format(template, name));
     }
-
-    @RequestMapping("/post")
-    public String post() {
-        return "post";
-    }
-
-    @RequestMapping("/post")
-    public String postSubmit(@ModelAttribute Post post) {
-        System.out.println(post.getEmail());
-        System.out.println(post.getPost());
-        return "result";
-    }
 }
