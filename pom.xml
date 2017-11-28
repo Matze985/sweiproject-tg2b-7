@@ -38,6 +38,13 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.30</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
         <!--TEST Dep-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
