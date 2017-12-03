@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktivität erstellen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.1.0/ui-bootstrap-tpls.js"></script>-->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <label style="font-family: Verdana" style="font-size: 500%" style="padding-left: 50px">Aktivität erstellen</label>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row row-offcanvas">
+        <ul class="nav">
+            <p>
+                <label style="font-family: Verdana" for="nameactivity">Titel:*<br>
+                    <input type="text"
+                           id="nameactivity"
+                           maxlength="100">
+                </label>
+            </p>
+            <p><label style="font-family: Verdana" for="createActivity">Beschreibung:* <br>
+                <textarea id="createActivity"
+                          cols="100"
+                          rows="20">
+                </textarea>
+            </label></p>
+            <p><label style="font-family: Verdana" for="email">Email:* <br>
+                <input type="text"
+                       id="email">
+            </label>
+            </p>
+            <button type="button" id="btnCommit">Bestätige</button>
+            <script>
+                document.getElementById("btnCommit").addEventListener("click", function () {
+                   location.href="index.html";
+                });
+            </script>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
