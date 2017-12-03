@@ -21,13 +21,13 @@ footer {
         background: #ecf0f1;
     }
 
-    .row-offcanvas-left,
+    /*.row-offcanvas-left,*/
     .sidebar-offcanvas {
-        left: -40%;
+        left: -45%;
     }
 
     .row-offcanvas-left.active {
-        left: 40%;
+        left: 45%;
     }
 
     .sidebar-offcanvas {
@@ -41,8 +41,16 @@ footer {
 #sidebar {
     padding: 15px;
     margin-top: 10px;
-    width: 250px;
+    margin-left: -15px;
+    width: 40%;
+    max-width: 250px;
     background-color: darkgray;
+}
+
+@media screen and (max-width: 768px) {
+    #sidebar {
+        margin-left: 12px;
+    }
 }
 
 .navbar {

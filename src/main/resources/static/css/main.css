@@ -3,3 +3,12 @@
     padding: 20px;
     margin-left: 250px;
 }
+
+.activityContainer {
+    padding-left: 15px;
+}
+
+.activity {
+    margin-left: 0;
+    margin-right: 0;
+}
