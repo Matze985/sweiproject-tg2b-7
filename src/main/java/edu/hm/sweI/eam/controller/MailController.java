@@ -20,7 +20,7 @@ public class MailController {
 
     @RequestMapping(API_BASE + "/mailAddress")
     public void mail(@RequestParam(value = "mailAddress") String mailAddress){
-        LOGGER.debug("Request called");
+        LOGGER.debug("MailAddress requested");
         LOGGER.debug(mailAddress);
     }
 
