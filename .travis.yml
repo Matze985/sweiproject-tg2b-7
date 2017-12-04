@@ -3,8 +3,11 @@ jdk:
 - oraclejdk8
 install:
 - mvn -N io.takari:maven:wrapper
-- "./mvnw install"
-script: mvn clean install
+- ./mvnw install
+addons:
+   sonarcloud:
+       organization: "sweiws2017_18"
+script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 env:
   global:
   - secure: sDe13KwKskJo3g3jtUX1wOheZbTLLFtY04cVfiUxaQ1l+sXb2MmkKXH6gPynemCz3US44o27vQisnVHKqxYYQR0KcbI9peMHHIbX0z9oKBJP7mLXob4H5WZOMGvPj0gMYxXX27jfXPB6R0Musw1a1UVkjHHLnn55LGqKm2gCh0w8yK6gP3fkFrwJBBEMu8W8DOpImN6lQv+XzSoSbcBLzAdlCDfVBucxsDzrkC3xXssQuBz9up2AaWxzCY1SzIoDfzynMKL41O5a0JMXkeE2KWjhB8kmjSD9P9Ssrqa84jE6NGgovnSKEm4DFTVEoOa5AbkITaZCK+5n2+C1KDrDUoKjsVx9PlxJx2mFLVyK3Ut35dhM0aAJW9pRkfCUEbkvaMzporrj6zkOZ2Ds9kp8okSj8qBWwuHdbvBcLdQRWXLxGC4HleahKauowMzke1d9uX15bRGobZI2cVauOfJlqehdBzaQmaDiq4B9Xap0PSCW8TLIw2tuntFNZZXkvt9+K1dVHNk1sjSNURwQFQIR4PUkRn3HO1FXGuCRIoLd9ka2BuKYZ2FBmHIzfL72VHhbhO7cZkFuDKHeWmhd9MAy0L0CZo8VECqkawaSS/N+539FMVzw5pjWbS9fHjRy3kH7CO9YTQjPedZ1rYPzCpiqIrykjDQcYCZ/Dzz+2T/H+k0=
