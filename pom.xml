@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>eam</artifactId>
+    <artifactId>eam_tg2b-7</artifactId>
     <version>0.1.0</version>
-    <name>Exchange Activity Meter (SWE1)</name>
+    <name>Exchange Activity Meter (sweiproject-tg2b-7)</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
