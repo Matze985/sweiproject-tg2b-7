@@ -22,6 +22,7 @@ public class MailController {
     public void mail(@RequestParam(value = "mailAddress") String mailAddress){
         LOGGER.debug("MailAddress requested");
         LOGGER.debug(mailAddress);
+        System.out.println(mailAddress);
     }
 
 }

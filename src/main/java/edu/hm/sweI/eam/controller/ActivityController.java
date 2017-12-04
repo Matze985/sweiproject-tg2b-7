@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static edu.hm.sweI.eam.controller.Constants.API_BASE;
+
 interface ActivityRepository extends CrudRepository<Activity, Long> {
 }
 
@@ -17,7 +19,7 @@ interface ActivityRepository extends CrudRepository<Activity, Long> {
  * Email: Matze.development@gmail.com
  */
 @RestController
-@RequestMapping("api/activity")
+@RequestMapping(API_BASE +"/activity")
 public class ActivityController {
     private final ActivityRepository activityRepository;
 
