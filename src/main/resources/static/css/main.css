@@ -1,14 +1,35 @@
+body {
+    padding-top: 50px;
+    background-color: currentColor;
+}
+
 #main {
-    transition: margin-left .5s;
-    padding: 20px;
-    margin-left: 250px;
+    /*transition: margin-left .5s;*/
+    /*padding: 20px;*/
+    /*margin-left: 250px;*/
+    background-color: lightblue;
+    float: right;
 }
 
 .activityContainer {
-    padding-left: 15px;
+    /*padding-left: 15px;*/
 }
 
 .activity {
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px 15px 15px;
+}
+
+/*override .row to remove right margin*/
+.row {
+    margin-right: 0;
+}
+
+/*override container-fluid to remove right padding*/
+.container-fluid {
+    padding-right: 0;
 }
