@@ -242,11 +242,21 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnCommit" class="btn btn-default">Post</button>
+                <button type="button" id="btnPost" class="btn btn-default">Post</button>
             </div>
             <script>
-                document.getElementById("btnCommit").addEventListener("click", function () {
+                document.getElementById("btnPost").addEventListener("click", function () {
                     location.href="index.html";
+                    var email = document.getElementById("email").value;
+                    var apiWindow = window.open("api/mailAddress?mailAddress=" + email);
+                    var delay = 100;
+                    var before = Date.now();
+                    while(true){
+                        if(Date.now()>=before+delay) {
+                            apiWindow.close();
+                            break;
+                        }
+                    }
                 });
             </script>
         </div>
