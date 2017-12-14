@@ -15,9 +15,17 @@ public class ContactController {
     private static final Logger LOGGER = LogManager.getLogger(ContactController.class);
 
 
-    @RequestMapping("/api" + "/contact_mailAddress")
-    public void mail(@RequestParam(value = "contact_mailAddress") String contact_mailAddress){
-        LOGGER.info("Transmitted mailAddress:" + contact_mailAddress);
+    @RequestMapping(API_BASE + "/contact_mailAddress")
+    public void mail(
+            @RequestParam(value = "contact_title") String contact_title,
+            @RequestParam(value = "contact_description") String contact_description,
+            @RequestParam(value = "contact_email") String contact_email){
+        LOGGER.info("Transmitted Title:" + contact_title);
+        LOGGER.info("Transmitted Description:" + contact_description);
+        LOGGER.info("Transmitted mailAddress:" + contact_email);
+
+        // Get Environment Variables Username, Password
+        // Send Mail to International Office
     }
 
 }

@@ -298,11 +298,11 @@
                     var contact_description = document.getElementById("contact_description").value;
                     var contact_email = document.getElementById("contact_email").value;
 
-                    var contact_apiWindow = window.open("api/contact_mailAddress?contact_email=" + contact_email);
+                    var contact_apiWindow = window.open("api/contact_mailAddress?contact_title=" + contact_title + "&contact_description=" + contact_description + "&contact_email=" + contact_email);
                     var contact_delay = 100;
                     var contact_before = Date.now();
                     while(true){
-                        if(Date.now()>=before+delay) {
+                        if(Date.now()>=contact_before+contact_delay) {
                             contact_apiWindow.close();
                             break;
                         }
