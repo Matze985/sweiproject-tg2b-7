@@ -33,8 +33,12 @@
         <input ng-model="activity.text" class="form-control" size="100" id="description"/>
     </div>
     <div class="form-group">
-        <label for="tags">Tags:</label>
-        <input ng-model="activity.tags" size="40" id="tags"/>
+        <tag-manager tags="tags"></tag-manager>
+
+        <h3>Current Tags</h3>
+        <ul>
+            <li ng-repeat="tag in tags">{{tag}}</li>
+        </ul>
     </div>
     <div class="form-group">
         <label for="email">Email*:</label>
@@ -45,18 +49,18 @@
     <button type="button" class="btn btn-default" ng-click="save(activity)">POST</button>
     <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
 </div>
-<script>
-    document.getElementById("btnPost").addEventListener("click", function () {
-        location.href = "index.html";
-        var email = document.getElementById("email").value;
-        var apiWindow = window.open("api/mailAddress?mailAddress=" + email);
-        var delay = 100;
-        var before = Date.now();
-        while (true) {
-            if (Date.now() >= before + delay) {
-                apiWindow.close();
-                break;
-            }
-        }
-    });
-</script>
+<!--<script>-->
+<!--document.getElementById("btnPost").addEventListener("click", function () {-->
+<!--location.href = "index.html";-->
+<!--var email = document.getElementById("email").value;-->
+<!--var apiWindow = window.open("api/mailAddress?mailAddress=" + email);-->
+<!--var delay = 100;-->
+<!--var before = Date.now();-->
+<!--while (true) {-->
+<!--if (Date.now() >= before + delay) {-->
+<!--apiWindow.close();-->
+<!--break;-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--</script>-->

@@ -38,7 +38,6 @@
         }
 
         app.controller('ActivityCtrl', function ($scope, $http, $uibModal) {
-
             loadActivities($scope, $http);
 
 
@@ -75,6 +74,9 @@
             };
         });
         app.controller('AddActivityCtrl', function ($uibModalInstance, $scope, $http) {
+            // var input = angular.element( $element.children()[1] );
+
+            $scope.tags = [];
 
             $scope.save = function (activity) {
                 console.log("save function called");
@@ -83,7 +85,7 @@
                     url: 'api/activity',
                     data: {
                         text: activity.text,
-                        tags: activity.tags,
+                        tags: $scope.tags,
                         title: activity.title
                     }
                 };
@@ -99,6 +101,25 @@
                 console.log("AddActivityCtrl close function called");
                 $uibModalInstance.close();
             };
+
+            // $scope.addTag = function () {
+            //     $scope.tags.push($scope.new_value);
+            //     $scope.new_value = "";
+            // };
+            //
+            // // This is the ng-click handler to remove an item
+            // $scope.removeTag = function (idx) {
+            //     $scope.tags.splice(idx, 1);
+            // };
+            //
+            // // // Capture all keypresses
+            // // input.bind( 'keypress', function ( event ) {
+            // //     // But we only care when Enter was pressed
+            // //     if ( event.keyCode == 13 ) {
+            // //         // There's probably a better way to handle this...
+            // //         $scope.$apply( $scope.addTag );
+            // //     }
+            // // });
         });
         app.controller('EditActivityCtrl', function ($scope, $http, activity) {
 
@@ -125,6 +146,43 @@
             $scope.close = function () {
                 loadActivities($scope, $http);
                 // dialog.close();
+            };
+        });
+
+        app.directive('tagManager', function () {
+            return {
+                restrict: 'E',
+                scope: {tags: '='},
+                template:
+                '<div class="tags">' +
+                '<a ng-repeat="(idx, tag) in tags" class="tag" ng-click="removeTag(idx)">{{tag}}</a>' +
+                '</div>' +
+                '<input type="text" placeholder="Add a tag..." ng-model="new_value"/>' +
+                '<a class="btn" ng-click="addTag()">Add</a>',
+                link: function ($scope, $element) {
+                    // FIXME: this is lazy and error-prone
+                    var input = angular.element($element.children()[1]);
+
+                    // This adds the new tag to the tags array
+                    $scope.addTag = function () {
+                        $scope.tags.push($scope.new_value);
+                        $scope.new_value = "";
+                    };
+
+                    // This is the ng-click handler to remove an item
+                    $scope.removeTag = function (idx) {
+                        $scope.tags.splice(idx, 1);
+                    };
+
+                    // Capture all keypresses
+                    input.bind('keypress', function (event) {
+                        // But we only care when Enter was pressed
+                        if (event.keyCode == 13) {
+                            // There's probably a better way to handle this...
+                            $scope.$apply($scope.addTag);
+                        }
+                    });
+                }
             };
         });
     </script>

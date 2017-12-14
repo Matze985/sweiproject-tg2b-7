@@ -1,5 +1,7 @@
 package edu.hm.sweI.eam.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,10 +21,12 @@ public class Activity implements Comparable<Activity> {
     private String text;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "Activity_Tag",
-            joinColumns = {@JoinColumn(name = "activity_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")}
-    )
+    @JoinTable
+    @JsonIgnoreProperties("activities")
+//            (name = "Activity_Tag",
+//            joinColumns = {@JoinColumn(name = "activity_id", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")}
+//    )
     private List<Tag> tags = new ArrayList<>();
 
     @Column(length = 128)

@@ -1,5 +1,7 @@
 package edu.hm.sweI.eam.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,15 @@ public class Tag {
     @Column(length = 128, nullable = false)
     private String tag;
     @ManyToMany(mappedBy = "tags")
+    @JsonIgnoreProperties("tags")
     private List<Activity> activities = new ArrayList<>();
+
+    public Tag() {
+    }
+
+    public Tag(String text) {
+        tag = text;
+    }
 
     public Long getId() {
         return id;
