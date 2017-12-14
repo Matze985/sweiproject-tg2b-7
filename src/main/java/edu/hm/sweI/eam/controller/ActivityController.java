@@ -1,6 +1,8 @@
 package edu.hm.sweI.eam.controller;
 
 import edu.hm.sweI.eam.entities.Activity;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ interface ActivityRepository extends CrudRepository<Activity, Long> {
 @RestController
 @RequestMapping(API_BASE +"/activity")
 public class ActivityController {
+    private static final Logger LOGGER = LogManager.getLogger(ActivityController.class);
+
     private final ActivityRepository activityRepository;
 
     @Autowired
@@ -34,6 +38,8 @@ public class ActivityController {
         activityRepository.findAll().forEach(activities::add);
         Collections.sort(activities);
         Collections.reverse(activities);
+        LOGGER.info("found " + activities.size() + " activities!");
+        LOGGER.debug("DEBUG TEST");
         return activities;
     }
 
@@ -44,6 +50,9 @@ public class ActivityController {
 
     @PostMapping
     public Activity create(@RequestBody Activity input) {
+        LOGGER.info(input.getTitle());
+        LOGGER.info(input.getText());
+        LOGGER.info(input.getTags());
         return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle()));
     }
 

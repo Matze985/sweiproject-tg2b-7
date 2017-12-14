@@ -8,7 +8,8 @@
 
     <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
     <script src="/webjars/angularjs/1.6.6/angular.min.js"></script>
-    <script src="/webjars/angular-ui-bootstrap/0.2.0/ui-bootstrap-tpls.js"></script>
+    <!--<script src="/webjars/angular-ui-bootstrap/0.2.0/ui-bootstrap-tpls.js"></script>-->
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <!--<script src="/webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>-->
 
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
@@ -36,7 +37,7 @@
             });
         }
 
-        app.controller('ActivityCtrl', function ($scope, $http, $dialog) {
+        app.controller('ActivityCtrl', function ($scope, $http, $uibModal) {
 
             loadActivities($scope, $http);
 
@@ -47,9 +48,8 @@
             };
 
             $scope.add = function (activity) {
-                $dialog.dialog(angular.extend(addDialogOptions, {})).open().then(function () {
-                    loadActivities($scope, $http);
-                });
+                console.log("open CreateActivity modal");
+                var modal = $uibModal.open(addDialogOptions);
             };
 
             var editDialogOptions = {
@@ -57,9 +57,9 @@
                 templateUrl: './activityEdit.html'
             };
             $scope.edit = function (activity) {
-                $dialog.dialog(angular.extend(editDialogOptions, {resolve: {activity: angular.copy(activity)}})).open().then(function () {
-                    loadActivities($scope, $http);
-                });
+                // $dialog.dialog(angular.extend(editDialogOptions, {resolve: {activity: angular.copy(activity)}})).open().then(function () {
+                //     loadActivities($scope, $http);
+                // });
             };
 
             $scope.delete = function (activity) {
@@ -74,16 +74,17 @@
                 //todo handle error
             };
         });
-        app.controller('AddActivityCtrl', function ($scope, $http, dialog) {
+        app.controller('AddActivityCtrl', function ($uibModalInstance, $scope, $http) {
 
             $scope.save = function (activity) {
+                console.log("save function called");
                 var postRequest = {
                     method: 'POST',
-                    url: 'activity',
+                    url: 'api/activity',
                     data: {
-                        text: $scope.activity.text,
-                        tags: $scope.activity.tags,
-                        title: $scope.activity.title
+                        text: activity.text,
+                        tags: activity.tags,
+                        title: activity.title
                     }
                 };
 
@@ -95,10 +96,11 @@
             };
 
             $scope.close = function () {
-                dialog.close(undefined);
+                console.log("AddActivityCtrl close function called");
+                $uibModalInstance.close();
             };
         });
-        app.controller('EditActivityCtrl', function ($scope, $http, activity, dialog) {
+        app.controller('EditActivityCtrl', function ($scope, $http, activity) {
 
             $scope.activity = activity;
             $scope.save = function ($activity) {
@@ -122,7 +124,7 @@
 
             $scope.close = function () {
                 loadActivities($scope, $http);
-                dialog.close();
+                // dialog.close();
             };
         });
     </script>
@@ -136,94 +138,88 @@
     </script>
 </head>
 <body>
-<div class="navbar navbar-fixed-top navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">ExchangeActivityMeter</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li id="search">Search</li>
-            </ul>
-        </div>
-        <!-- /.nav-collapse -->
-    </div>
-    <!-- /.container -->
-</div>
-<!-- /.navbar -->
+<ng-controller ng-controller="ActivityCtrl">
 
-<div class="container-fluid">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div class="sidebar-nav">
-                <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Aktivitäten</a></li>
-                    <li><a href="activityAdd.html" data-toggle="modal" data-target="#CreateActivity">Aktivität
-                        erstellen</a></li>
-                    <!--<li><a href="CreateActivity.html">Aktivität erstellen</a></li>-->
-                    <li><a href="#">Kontakt</a></li>
-                    <li class="nav-divider"></li>
-                    <li><a href="#">Link</a></li>
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ExchangeActivityMeter</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="search">Search</li>
                 </ul>
             </div>
-            <!--/.well -->
+            <!-- /.nav-collapse -->
         </div>
-        <!--/span-->
+        <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
 
-        <div class="col-xs-12 col-sm-9" id="main">
-            <br>
-            <div class="jumbotron">
-                <!--<a href="#" class="visible-xs" data-toggle="offcanvas"><i class="fa fa-lg fa-reorder"></i></a>-->
-                <h1>Welcome to the ExchangeActivityMeter</h1>
-                <p>This is the website of the Exchange Activity Meter. If you are interested in an exchange program,
-                    have a look at the following posts.</p>
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                    <ul class="nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Aktivitäten</a></li>
+                        <li><a data- ng-click="add()">Aktivität erstellen</a></li>
+                        <!--href="activityAdd.html" data-toggle="modal" data-target="#CreateActivity"-->
+                        <!--<li><a href="CreateActivity.html">Aktivität erstellen</a></li>-->
+                        <li><a href="#">Kontakt</a></li>
+                        <li class="nav-divider"></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </div>
+                <!--/.well -->
             </div>
-            <div ng-controller="ActivityCtrl" class="activityContainer">
-                <div ng-repeat="activity in activities" class="row activity">
-                    <div class="col col-sm col-lg">
-                        <h2>{{activity.title}}</h2>
-                        <p>{{activity.text}}</p>
-                        <p>{{activity.tags}}</p>
-                        <div ng-switch on="activity.updated">
-                            <p ng-switch-when="null">Created: {{activity.created | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-                            <p ng-switch-default>Updated: {{activity.updated | date:'dd-MM-yyyy HH:mm:ss'}}</p>
-                        </div>
+            <!--/span-->
 
-                        <p>
-                            <button class="btn btn-default" ng-click="edit(activity)" disabled>edit</button>
-                            <button class="btn btn-default" ng-click="delete(activity)" disabled>delete</button>
-                        </p>
+            <div class="col-xs-12 col-sm-9" id="main">
+                <br>
+                <div class="jumbotron">
+                    <!--<a href="#" class="visible-xs" data-toggle="offcanvas"><i class="fa fa-lg fa-reorder"></i></a>-->
+                    <h1>Welcome to the ExchangeActivityMeter</h1>
+                    <p>This is the website of the Exchange Activity Meter. If you are interested in an exchange program,
+                        have a look at the following posts.</p>
+                </div>
+                <div class="activityContainer">
+                    <div ng-repeat="activity in activities" class="row activity">
+                        <div class="col col-sm col-lg">
+                            <h2>{{activity.title}}</h2>
+                            <p>{{activity.text}}</p>
+                            <p>{{activity.tags}}</p>
+                            <div ng-switch on="activity.updated">
+                                <p ng-switch-when="null">Created: {{activity.created | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                                <p ng-switch-default>Updated: {{activity.updated | date:'dd-MM-yyyy HH:mm:ss'}}</p>
+                            </div>
+
+                            <p>
+                                <button class="btn btn-default" ng-click="edit(activity)" disabled>edit</button>
+                                <button class="btn btn-default" ng-click="delete(activity)" disabled>delete</button>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--/span-->
+            <!--/span-->
 
+
+        </div>
+        <!--/row-->
+
+        <hr>
+
+        <footer>
+            <p>© Company 2017</p>
+        </footer>
 
     </div>
-    <!--/row-->
-
-    <hr>
-
-    <footer>
-        <p>© Company 2013</p>
-    </footer>
-
-</div>
+</ng-controller>
 </body>
-
-<!-- Modal Create Activity -->
-<div id="CreateActivity" class="modal fade" role="dialog" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-
 </html>
