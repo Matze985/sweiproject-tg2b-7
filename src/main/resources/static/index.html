@@ -276,15 +276,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="title">Betreff*:</label>
+                    <label for="contact_title">Betreff*:</label>
                     <input type="text" class="form-control" id="contact_title">
                 </div>
                 <div class="form-group">
-                    <label for="description">Beschreibung*:</label>
+                    <label for="contact_description">Beschreibung*:</label>
                     <textarea class="form-control" rows="10" id="contact_description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email-Absender*:</label>
+                    <label for="contact_email">Email-Absender*:</label>
                     <input type="text" class="form-control" id="contact_email">
                 </div>
             </div>
@@ -294,13 +294,16 @@
             <script>
                 document.getElementById("contact_btnPost").addEventListener("click", function () {
                     location.href="index.html";
+                    var contact_title = document.getElementById("contact_title").value;
+                    var contact_description = document.getElementById("contact_description").value;
                     var contact_email = document.getElementById("contact_email").value;
-                    var contact_apiWindow = window.open("api/mailAddress?mailAddress=" + contact_email);
+
+                    var contact_apiWindow = window.open("api/contact_mailAddress?contact_email=" + contact_email);
                     var contact_delay = 100;
                     var contact_before = Date.now();
                     while(true){
                         if(Date.now()>=before+delay) {
-                            apiWindow.close();
+                            contact_apiWindow.close();
                             break;
                         }
                     }
