@@ -251,7 +251,9 @@
                         <div class="col col-sm col-lg">
                             <h2>{{activity.title}}</h2>
                             <p>{{activity.text}}</p>
-                            <p>{{activity.tags}}</p>
+                            <div>
+                                <a ng-repeat="tag in activity.tags">#{{tag.tag}} </a>
+                            </div>
                             <div ng-switch on="activity.updated">
                                 <p ng-switch-when="null">Created: {{activity.created | date:'dd-MM-yyyy HH:mm:ss'}}</p>
                                 <p ng-switch-default>Updated: {{activity.updated | date:'dd-MM-yyyy HH:mm:ss'}}</p>
