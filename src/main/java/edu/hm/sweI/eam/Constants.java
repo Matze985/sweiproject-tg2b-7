@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.sweI.eam;
 
 /**
  * Author: Mario

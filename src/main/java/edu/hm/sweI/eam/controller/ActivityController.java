@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static edu.hm.sweI.eam.controller.Constants.API_BASE;
+import static edu.hm.sweI.eam.Constants.API_BASE;
 
 interface ActivityRepository extends CrudRepository<Activity, Long> {
 }

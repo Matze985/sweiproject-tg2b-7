@@ -1,7 +1,9 @@
 package edu.hm.sweI.eam.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Matthias Rude on 03.12.2017.
@@ -15,8 +17,14 @@ public class Activity implements Comparable<Activity> {
     private Long id;
     @Column(length = 2048)
     private String text;
-    @Column(length = 512)
-    private String tags;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "Activity_Tag",
+            joinColumns = {@JoinColumn(name = "activity_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")}
+    )
+    private List<Tag> tags = new ArrayList<>();
+
     @Column(length = 128)
     private String title;
     @Column(nullable = false)
@@ -28,7 +36,7 @@ public class Activity implements Comparable<Activity> {
     public Activity() {
     }
 
-    public Activity(String text, String tags, String title) {
+    public Activity(String text, List<Tag> tags, String title) {
         this.text = text;
         this.tags = tags;
         this.title = title;
@@ -60,11 +68,11 @@ public class Activity implements Comparable<Activity> {
         this.text = text;
     }
 
-    public String getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
