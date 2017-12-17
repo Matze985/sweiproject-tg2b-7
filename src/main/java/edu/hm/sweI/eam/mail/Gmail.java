@@ -1,9 +1,13 @@
 package edu.hm.sweI.eam.mail;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 
@@ -11,14 +15,29 @@ public class Gmail {
 
     private String username;
     private String password;
+    private String mailAddressTo;
+    private String mailAddressFrom;
+    private String subject;
+    private String text;
 
-    public Gmail(String username, String password) {
+
+    private static final Logger LOGGER = LogManager.getLogger(Gmail.class);
+
+    public Gmail(String username, String password, String mailAddressTo, String mailAddressFrom, String subject, String text) {
         this.username = username;
         this.password = password;
+        this.mailAddressTo = mailAddressTo;
+        this.mailAddressFrom = mailAddressFrom;
+        this.subject = subject;
+        this.text = text;
     }
 
-    public void send(){
+    public void send() {
 
+        //final String username = "sweiproject.tg2b.7@gmail.com";
+        //final String password = "softwareengineering1";
+
+        LOGGER.info(username +" "+ password+" "+mailAddressTo+ " "+mailAddressFrom +" "+subject+ " "+text);
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -35,12 +54,11 @@ public class Gmail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(""+mailAddressFrom, ""+mailAddressFrom));//new InternetAddress(mailAddressFrom));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(username));
-            message.setSubject("Testing Subject");
-            message.setText("Dear Mail Crawler2,"
-                    + "\n\n No spam to my email, please!");
+                    InternetAddress.parse(""+mailAddressTo));
+            message.setSubject(subject);
+            message.setText(text);
 
             Transport.send(message);
 
@@ -48,6 +66,8 @@ public class Gmail {
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 }

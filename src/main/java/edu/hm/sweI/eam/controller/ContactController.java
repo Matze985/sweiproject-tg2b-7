@@ -1,17 +1,25 @@
 package edu.hm.sweI.eam.controller;
 
+import edu.hm.sweI.eam.mail.Gmail;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 import static edu.hm.sweI.eam.controller.Constants.API_BASE;
 
+@PropertySource("classpath:application-dev.properties")
 
 @RestController
 public class ContactController {
 
+    @Resource
+    private Environment environment;
     private static final Logger LOGGER = LogManager.getLogger(ContactController.class);
 
 
@@ -25,7 +33,14 @@ public class ContactController {
         LOGGER.info("Transmitted mailAddress:" + contact_email);
 
         // Get Environment Variables Username, Password
+        LOGGER.info("Environment Variables:" + environment.getProperty("GMAIL_USERNAME"));
+        LOGGER.info("Environment Variables:" + environment.getProperty("GMAIL_PASSWORD"));
+
         // Send Mail to International Office
+        String mailAddressTo = environment.getProperty("GMAIL_USERNAME");
+        String password = environment.getProperty("GMAIL_PASSWORD");
+        Gmail gmail = new Gmail(""+mailAddressTo, ""+password, ""+mailAddressTo, ""+contact_email, ""+contact_title, ""+contact_description);
+        gmail.send();
     }
 
 }
