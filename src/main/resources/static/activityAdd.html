@@ -1,19 +1,66 @@
+<!--<div class="modal-header">-->
+<!--<h1>Add</h1>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<p>-->
+<!--Title <input ng-model="activity.title" size="40"/>-->
+<!--</p>-->
+<!--<p>-->
+<!--Text <input ng-model="activity.text" size="100"/>-->
+<!--</p>-->
+<!--<p>-->
+<!--Tags <input ng-model="activity.tags" size="40"/>-->
+<!--</p>-->
+
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button ng-click="save(activity)">Save</button>-->
+<!--<button ng-click="close()">Close</button>-->
+<!--</div>-->
+
+<!-- --------------------------------------------------------------------------------------------------------------- -->
 <div class="modal-header">
-    <h1>Add</h1>
+    <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+    <h4 class="modal-title">Post Activity</h4>
 </div>
 <div class="modal-body">
-    <p>
-        Title <input ng-model="activity.title" size="40"/>
-    </p>
-    <p>
-        Text <input ng-model="activity.text" size="100"/>
-    </p>
-    <p>
-        Tags <input ng-model="activity.tags" size="40"/>
-    </p>
+    <div class="form-group">
+        <label for="title">Title*:</label>
+        <input ng-model="activity.title" class="form-control" id="title" size="40"/>
+    </div>
+    <div class="form-group">
+        <label for="description">Description*:</label>
+        <input ng-model="activity.text" class="form-control" size="100" id="description"/>
+    </div>
+    <div class="form-group">
+        <tag-manager tags="tags"></tag-manager>
 
+        <h3>Current Tags</h3>
+        <ul>
+            <li ng-repeat="tag in tags">{{tag}}</li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <label for="email">Email*:</label>
+        <input type="text" class="form-control" id="email">
+    </div>
 </div>
 <div class="modal-footer">
-    <button ng-click="save(activity)">Save</button>
-    <button ng-click="close()">Close</button>
+    <button type="button" class="btn btn-default" ng-click="save(activity)">POST</button>
+    <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
 </div>
+<!--<script>-->
+<!--document.getElementById("btnPost").addEventListener("click", function () {-->
+<!--location.href = "index.html";-->
+<!--var email = document.getElementById("email").value;-->
+<!--var apiWindow = window.open("api/mailAddress?mailAddress=" + email);-->
+<!--var delay = 100;-->
+<!--var before = Date.now();-->
+<!--while (true) {-->
+<!--if (Date.now() >= before + delay) {-->
+<!--apiWindow.close();-->
+<!--break;-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--</script>-->

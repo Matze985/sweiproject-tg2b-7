@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static edu.hm.sweI.eam.controller.Constants.API_BASE;
-
 @PropertySource("classpath:application-dev.properties")
 
 @RestController
@@ -23,7 +21,7 @@ public class ContactController {
     private static final Logger LOGGER = LogManager.getLogger(ContactController.class);
 
 
-    @RequestMapping(API_BASE + "/contact_mailAddress")
+    @RequestMapping("/api/contact_mailAddress")
     public void mail(
             @RequestParam(value = "contact_title") String contact_title,
             @RequestParam(value = "contact_description") String contact_description,

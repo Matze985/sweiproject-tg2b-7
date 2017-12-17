@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static edu.hm.sweI.eam.controller.Constants.API_BASE;
+import static edu.hm.sweI.eam.Constants.API_BASE;
 
 /**
  * Author: Mario
