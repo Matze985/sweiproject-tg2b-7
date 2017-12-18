@@ -14,18 +14,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Author: Mario
- * Date: 18.12.2017
+ * Created by Matthias Rude on 18.12.2017.
+ * Email: Matze.development@gmail.com
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MailControllerTest {
+public class TagControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void noParamTagShouldReturnTagList() throws Exception {
-        this.mockMvc.perform(get(API_BASE + "/mailAddress").content("test@test.de")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(get(API_BASE + "/tag")).andDo(print()).andExpect(status().isOk());
     }
 }
