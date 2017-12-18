@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Matthias Rude on 03.12.2017.
@@ -104,8 +105,32 @@ public class Activity implements Comparable<Activity> {
         this.updated = updated;
     }
 
+    public void addTag(Tag tag) {
+        tags.add(tag);
+        tag.getActivities().add(this);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+        tag.getActivities().remove(this);
+    }
+
     @Override
     public int compareTo(Activity o) {
         return this.getCreated().compareTo(o.getCreated());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return Objects.equals(id, activity.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
     }
 }

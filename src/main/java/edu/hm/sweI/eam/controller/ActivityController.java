@@ -1,6 +1,7 @@
 package edu.hm.sweI.eam.controller;
 
 import edu.hm.sweI.eam.entities.Activity;
+import edu.hm.sweI.eam.entities.Tag;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,12 @@ public class ActivityController {
     private static final Logger LOGGER = LogManager.getLogger(ActivityController.class);
 
     private final ActivityRepository activityRepository;
+    private final TagRepository tagRepository;
 
     @Autowired
-    public ActivityController(ActivityRepository activityRepository) {
+    public ActivityController(ActivityRepository activityRepository, TagRepository tagRepository) {
         this.activityRepository = activityRepository;
+        this.tagRepository = tagRepository;
     }
 
     @GetMapping
@@ -52,7 +55,15 @@ public class ActivityController {
     public Activity create(@RequestBody Activity input) {
         LOGGER.info(input.getTitle());
         LOGGER.info(input.getText());
-        LOGGER.info(input.getTags());
+
+        List<Tag> tags = new ArrayList<>(input.getTags());
+        input.getTags().clear();
+        tags.forEach(tag -> {
+            Tag fromDB = tagRepository.findByTag(tag.getTag());
+            input.addTag(fromDB);
+        });
+
+        input.getTags().forEach(LOGGER::info);
         return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle()));
     }
 
