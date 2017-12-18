@@ -42,10 +42,7 @@ public class Gmail {
             Transport.send(message);
 
             LOGGER.info("Done sending message.");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+        }catch (MessagingException | UnsupportedEncodingException e) {
             LOGGER.error(e.getMessage());
         }
     }
