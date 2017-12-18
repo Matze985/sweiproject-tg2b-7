@@ -1,58 +1,56 @@
 package edu.hm.sweI.eam.mail;
 
-import com.sun.javafx.binding.SelectBinding;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-import static edu.hm.sweI.eam.Constants.API_BASE;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
+import static org.junit.Assert.*;
 
 
-@PropertySource("classpath:application-dev.properties")
-
+@RunWith(SpringJUnit4ClassRunner.class)
 public class GmailTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Resource
-    private Environment environment;
+    private String username = "testUser";
+    private String password = "testPassword";
+    private String mailAddressTo = "testMailTo";
+    private String mailAddressFrom = "testMailFrom";
+    private String subject = "testSubject";
+    private String text = "testText";
 
     @Test
-    public void testSystemEnvironmentalVariables() throws Exception {
+    public void gmailGetsInitializedCorrectly() {
+        Gmail gmail = new Gmail(username, password, mailAddressTo, mailAddressFrom, subject, text);
 
-        Assert.assertEquals(environment.getProperty("GMAIL_USERNAME"), "sweiproject.tg2b.7@gmail.com");
-        Assert.assertEquals(environment.getProperty("GMAIL_PASSWORD"), "softwareengineering1");
+        assertEquals(username, gmail.getUsername());
+        try {
+            Field fieldPassword = gmail.getClass().getDeclaredField("password");
+            fieldPassword.setAccessible(true);
+            assertEquals(password, fieldPassword.get(gmail));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        assertEquals(mailAddressTo, gmail.getMailAddressTo());
+        assertEquals(mailAddressFrom, gmail.getMailAddressFrom());
+        assertEquals(subject, gmail.getSubject());
+        assertEquals(text, gmail.getText());
     }
 
     @Test
-    @RequestMapping("/api/contact_mailAddress")
-    public void testUserInput(
-        @RequestParam(value = "contact_title") String contact_title,
-        @RequestParam(value = "contact_description") String contact_description,
-        @RequestParam(value = "contact_email") String contact_email) throws  Exception{
+    public void createMessageIsCreatingCorrectMessage() throws MessagingException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Gmail gmail = new Gmail(username, password, mailAddressTo, mailAddressFrom, subject, text);
+        Method createMessage = Gmail.class.getDeclaredMethod("createMessage");
+        createMessage.setAccessible(true);
+        Message message = (Message) createMessage.invoke(gmail);
 
-        Assert.assertNotNull(contact_title);
-        Assert.assertNotNull(contact_description);
-        Assert.assertNotNull(contact_email);
+        assertNotNull(message);
+        assertEquals(mailAddressTo, message.getAllRecipients()[0].toString());
+        assertTrue(message.getFrom()[0].toString().contains(mailAddressFrom));
+        assertEquals(subject, message.getSubject());
     }
 }
