@@ -1,5 +1,6 @@
 package edu.hm.sweI.eam.mail;
 
+import edu.hm.sweI.eam.BaseEqualsHashCodeTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class GmailTest {
+public class GmailTest extends BaseEqualsHashCodeTest<Gmail> {
 
     private String username = "testUser";
     private String password = "testPassword";
@@ -22,6 +23,11 @@ public class GmailTest {
     private String mailAddressFrom = "testMailFrom";
     private String subject = "testSubject";
     private String text = "testText";
+
+    public GmailTest() {
+        super(() -> new Gmail("eq", "eq", "eq", "eq", "eq", "eq"),
+                new Gmail("diff", "diff", "diff", "diff", "diff", "diff"));
+    }
 
     @Test
     public void gmailGetsInitializedCorrectly() {
