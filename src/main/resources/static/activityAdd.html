@@ -42,11 +42,11 @@
     </div>
     <div class="form-group">
         <label for="email">Email*:</label>
-        <input type="text" class="form-control" id="email">
+        <input ng-model="mail" ng-required="true" type="email" class="form-control" id="email">
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="save(activity)">POST</button>
+    <button type="button" class="btn btn-default" ng-click="save(activity, mail)">POST</button>
     <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
 </div>
 <!--<script>-->

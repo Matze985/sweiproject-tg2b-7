@@ -81,7 +81,7 @@
 
             $scope.tags = [];
 
-            $scope.save = function (activity) {
+            $scope.save = function (activity, mail) {
                 console.log("save function called");
 
                 $http({
@@ -98,8 +98,12 @@
                             title: activity.title
                         }
                     }).then(function (response) {
-                        $scope.activities = response.data;
-                    }).then(function () {
+                        $scope.activity = response.data;
+                    }).then($http({
+                        method: 'POST',
+                        url: 'api/mailAddress',
+                        data: mail
+                    })).then(function () {
                         $scope.close();
                     });
                 });

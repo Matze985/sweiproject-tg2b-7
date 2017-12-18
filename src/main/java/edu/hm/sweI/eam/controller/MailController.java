@@ -2,8 +2,8 @@ package edu.hm.sweI.eam.controller;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static edu.hm.sweI.eam.Constants.API_BASE;
@@ -19,7 +19,7 @@ public class MailController {
 
 
     @RequestMapping(API_BASE + "/mailAddress")
-    public void mail(@RequestParam(value = "mailAddress") String mailAddress){
+    public void mail(@RequestBody String mailAddress) {
         LOGGER.info("Transmitted mailAddress:" + mailAddress);
     }
 
