@@ -19,36 +19,50 @@
 <!--</div>-->
 
 <!-- --------------------------------------------------------------------------------------------------------------- -->
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
-    <h4 class="modal-title">Post Activity</h4>
-</div>
-<div class="modal-body">
-    <div class="form-group">
-        <label for="title">Title*:</label>
-        <input ng-model="activity.title" class="form-control" id="title" size="40"/>
+<form name="addForm" novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+        <h4 class="modal-title">Post Activity</h4>
     </div>
-    <div class="form-group">
-        <label for="description">Description*:</label>
-        <input ng-model="activity.text" class="form-control" size="100" id="description"/>
-    </div>
-    <div class="form-group">
-        <tag-manager tags="tags"></tag-manager>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{ 'has-error' : addForm.title.$invalid && !addForm.title.$pristine }">
+            <label for="title" class="control-label required">Title</label>
+            <input ng-model="activity.title" ng-required="true" type="text" class="form-control" size="40" id="title"
+                   name="title"/>
+            <span class="help-block" ng-show="addForm.title.$invalid && !addForm.title.$pristine">
+                Title is required.
+            </span>
+        </div>
 
-        <h3>Current Tags</h3>
-        <ul>
-            <li ng-repeat="tag in tags">{{tag}}</li>
-        </ul>
+        <div class="form-group"
+             ng-class="{ 'has-error' : addForm.description.$invalid && !addForm.description.$pristine }">
+            <label for="description" class="control-label required">Description</label>
+            <input ng-model="activity.text" ng-required="true" type="text" class="form-control" size="100"
+                   id="description" name="description"/>
+            <span class="help-block" ng-show="addForm.description.$invalid && !addForm.description.$pristine">
+                Description is required.
+            </span>
+        </div>
+
+        <div class="form-group">
+            <tag-manager tags="tags"></tag-manager>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : addForm.email.$invalid && !addForm.email.$pristine }">
+            <label for="email" class="control-label required">Email</label>
+            <input ng-model="mail" ng-required="true" type="email" class="form-control" id="email" name="email">
+            <span class="help-block" ng-show="addForm.email.$invalid && !addForm.email.$pristine">
+                Title is required.
+            </span>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="email">Email*:</label>
-        <input ng-model="mail" ng-required="true" type="email" class="form-control" id="email">
+    <div class="modal-footer">
+        <button type="button" ng-disabled="!addForm.$valid" class="btn btn-default"
+                ng-click="save(activity, mail)">POST
+        </button>
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
     </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="save(activity, mail)">POST</button>
-    <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
-</div>
+</form>
 <!--<script>-->
 <!--document.getElementById("btnPost").addEventListener("click", function () {-->
 <!--location.href = "index.html";-->

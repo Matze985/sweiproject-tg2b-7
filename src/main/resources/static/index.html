@@ -167,10 +167,11 @@
                 scope: {tags: '='},
                 template:
                 '<div class="tags">' +
-                '<a ng-repeat="(idx, tag) in tags" class="tag" ng-click="removeTag(idx)">{{tag}}</a>' +
+                '<button ng-repeat="(idx, tag) in tags" class="btn btn-default" ng-click="removeTag(idx)" style="margin-bottom: 5px;">{{tag}} &times;</button>' +
                 '</div>' +
-                '<input type="text" placeholder="Add a tag..." ng-model="new_value"/>' +
-                '<a class="btn" ng-click="addTag()">Add</a>',
+                '<br>' +
+                '<input ng-model="new_value" type="text" class="form-control" placeholder="Add a tag..." style="width: 50%; float: left;"/>' +
+                '<button type="button" class="btn btn-default" ng-click="addTag()" style="margin-left: 5px;">Add</button>',
                 link: function ($scope, $element) {
                     // FIXME: this is lazy and error-prone
                     var input = angular.element($element.children()[1]);
