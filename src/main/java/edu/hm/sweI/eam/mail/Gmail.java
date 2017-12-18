@@ -33,11 +33,23 @@ public class Gmail {
     }
 
     public void send() {
-
-        //final String username = "sweiproject.tg2b.7@gmail.com";
-        //final String password = "softwareengineering1";
-
         LOGGER.info(username +" "+ password+" "+mailAddressTo+ " "+mailAddressFrom +" "+subject+ " "+text);
+        try {
+
+            Message message = createMessage();
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Message createMessage() throws UnsupportedEncodingException, MessagingException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -51,24 +63,34 @@ public class Gmail {
                     }
                 });
 
-        try {
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("" + mailAddressFrom, "" + mailAddressFrom));//new InternetAddress(mailAddressFrom));
+        message.setRecipients(Message.RecipientType.TO,
+                InternetAddress.parse("" + mailAddressTo));
+        message.setSubject(subject);
+        message.setText(text);
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(""+mailAddressFrom, ""+mailAddressFrom));//new InternetAddress(mailAddressFrom));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(""+mailAddressTo));
-            message.setSubject(subject);
-            message.setText(text);
+        return message;
+    }
 
-            Transport.send(message);
+    public String getUsername() {
+        return username;
+    }
 
-            System.out.println("Done");
+    public String getMailAddressTo() {
+        return mailAddressTo;
+    }
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    public String getMailAddressFrom() {
+        return mailAddressFrom;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getText() {
+        return text;
     }
 }
 
