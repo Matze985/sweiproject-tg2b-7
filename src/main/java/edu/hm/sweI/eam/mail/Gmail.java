@@ -41,7 +41,7 @@ public class Gmail {
 
             Transport.send(message);
 
-            System.out.println("Done");
+            LOGGER.info("Done sending message.");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -49,6 +49,7 @@ public class Gmail {
             LOGGER.error(e.getMessage());
         }
     }
+
 
     private Message createMessage() throws UnsupportedEncodingException, MessagingException {
         Properties props = new Properties();
@@ -59,13 +60,14 @@ public class Gmail {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
+                    @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
                 });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("" + mailAddressFrom, "" + mailAddressFrom));//new InternetAddress(mailAddressFrom));
+        message.setFrom(new InternetAddress("" + mailAddressFrom, "" + mailAddressFrom));
         message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse("" + mailAddressTo));
         message.setSubject(subject);
