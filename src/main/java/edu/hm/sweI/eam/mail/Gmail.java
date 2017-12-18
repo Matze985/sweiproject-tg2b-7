@@ -8,6 +8,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 import java.util.Properties;
 
 
@@ -45,7 +46,7 @@ public class Gmail {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -91,6 +92,25 @@ public class Gmail {
 
     public String getText() {
         return text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Gmail gmail = (Gmail) o;
+        return Objects.equals(username, gmail.username) &&
+                Objects.equals(password, gmail.password) &&
+                Objects.equals(mailAddressTo, gmail.mailAddressTo) &&
+                Objects.equals(mailAddressFrom, gmail.mailAddressFrom) &&
+                Objects.equals(subject, gmail.subject) &&
+                Objects.equals(text, gmail.text);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(username, password, mailAddressTo, mailAddressFrom, subject, text);
     }
 }
 
