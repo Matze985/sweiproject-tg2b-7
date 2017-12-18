@@ -1,9 +1,13 @@
 package edu.hm.sweI.eam.mail;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 
@@ -11,14 +15,41 @@ public class Gmail {
 
     private String username;
     private String password;
+    private String mailAddressTo;
+    private String mailAddressFrom;
+    private String subject;
+    private String text;
 
-    public Gmail(String username, String password) {
+
+    private static final Logger LOGGER = LogManager.getLogger(Gmail.class);
+
+    public Gmail(String username, String password, String mailAddressTo, String mailAddressFrom, String subject, String text) {
         this.username = username;
         this.password = password;
+        this.mailAddressTo = mailAddressTo;
+        this.mailAddressFrom = mailAddressFrom;
+        this.subject = subject;
+        this.text = text;
     }
 
-    public void send(){
+    public void send() {
+        LOGGER.info(username +" "+ password+" "+mailAddressTo+ " "+mailAddressFrom +" "+subject+ " "+text);
+        try {
 
+            Message message = createMessage();
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Message createMessage() throws UnsupportedEncodingException, MessagingException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -32,23 +63,34 @@ public class Gmail {
                     }
                 });
 
-        try {
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("" + mailAddressFrom, "" + mailAddressFrom));//new InternetAddress(mailAddressFrom));
+        message.setRecipients(Message.RecipientType.TO,
+                InternetAddress.parse("" + mailAddressTo));
+        message.setSubject(subject);
+        message.setText(text);
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(username));
-            message.setSubject("Testing Subject");
-            message.setText("Dear Mail Crawler2,"
-                    + "\n\n No spam to my email, please!");
+        return message;
+    }
 
-            Transport.send(message);
+    public String getUsername() {
+        return username;
+    }
 
-            System.out.println("Done");
+    public String getMailAddressTo() {
+        return mailAddressTo;
+    }
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+    public String getMailAddressFrom() {
+        return mailAddressFrom;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getText() {
+        return text;
     }
 }
 

@@ -201,5 +201,7 @@ gradle-app.setting
 
 
 .idea/
-gs-rest-service.iml
 src/main/resources/application-dev.properties
+
+# Avoid all .iml Files
+*.iml
