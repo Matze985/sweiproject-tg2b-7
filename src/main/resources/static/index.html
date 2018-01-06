@@ -95,7 +95,8 @@
                         data: {
                             text: activity.text,
                             tags: tags.data,
-                            title: activity.title
+                            title: activity.title,
+                            base64image: activity.base64image
                         }
                     }).then(function (response) {
                         $scope.activity = response.data;
@@ -143,7 +144,8 @@
                     data: {
                         text: $scope.activity.text,
                         tags: $scope.activity.tags,
-                        title: $scope.activity.title
+                        title: $scope.activity.title,
+                        base64image: $scope.activity.base64image
                     }
                 };
 
@@ -263,6 +265,7 @@
                         <div class="col col-sm col-lg">
                             <h2>{{activity.title}}</h2>
                             <p>{{activity.text}}</p>
+                            <p>{{activity.image}}</p>
                             <div>
                                 <a ng-repeat="tag in activity.tags">#{{tag.tag}} </a>
                             </div>
