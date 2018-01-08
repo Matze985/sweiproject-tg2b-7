@@ -14,11 +14,11 @@ import javax.annotation.Resource;
 @RestController
 public class ContactController {
 
-    @Value("${gmail.username}")
-    String gmailUsername;
+  //  @Value("${gmail.username}")
+  //  String gmailUsername;
 
-    @Value("${gmail.password}")
-    String gmailPassword;
+   // @Value("${gmail.password}")
+   // String gmailPassword;
 
     @Resource
     private Environment environment;
@@ -39,8 +39,8 @@ public class ContactController {
         LOGGER.info("Environment Variables:" + environment.getProperty("GMAIL_PASSWORD"));
 
         // Send Mail to International Office
-        Gmail gmail = new Gmail(gmailUsername, gmailPassword, gmailUsername, "" + contact_email, "" + contact_title, "" + contact_description);
-        gmail.send();
+        //Gmail gmail = new Gmail(gmailUsername, gmailPassword, gmailUsername, "" + contact_email, "" + contact_title, "" + contact_description);
+        //gmail.send();
     }
 
 }

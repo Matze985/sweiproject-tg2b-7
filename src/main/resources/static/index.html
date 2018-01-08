@@ -96,7 +96,7 @@
                             text: activity.text,
                             tags: tags.data,
                             title: activity.title,
-                            base64image: activity.base64image
+                            base64image: convertImgToBase64(activity.base64image)
                         }
                     }).then(function (response) {
                         $scope.activity = response.data;
@@ -108,98 +108,97 @@
                         $scope.close();
                     });
                 });
-            };
 
+                // $scope.addTag = function () {
+                //     $scope.tags.push($scope.new_value);
+                //     $scope.new_value = "";
+                // };
+                //
+                // // This is the ng-click handler to remove an item
+                // $scope.removeTag = function (idx) {
+                //     $scope.tags.splice(idx, 1);
+                // };
+                //
+                // // // Capture all keypresses
+                // // input.bind( 'keypress', function ( event ) {
+                // //     // But we only care when Enter was pressed
+                // //     if ( event.keyCode == 13 ) {
+                // //         // There's probably a better way to handle this...
+                // //         $scope.$apply( $scope.addTag );
+                // //     }
+                // // });
+            };
             $scope.close = function () {
                 console.log("AddActivityCtrl close function called");
                 $uibModalInstance.close();
             };
-
-            // $scope.addTag = function () {
-            //     $scope.tags.push($scope.new_value);
-            //     $scope.new_value = "";
-            // };
-            //
-            // // This is the ng-click handler to remove an item
-            // $scope.removeTag = function (idx) {
-            //     $scope.tags.splice(idx, 1);
-            // };
-            //
-            // // // Capture all keypresses
-            // // input.bind( 'keypress', function ( event ) {
-            // //     // But we only care when Enter was pressed
-            // //     if ( event.keyCode == 13 ) {
-            // //         // There's probably a better way to handle this...
-            // //         $scope.$apply( $scope.addTag );
-            // //     }
-            // // });
         });
-        app.controller('EditActivityCtrl', function ($scope, $http, activity) {
+            app.controller('EditActivityCtrl', function ($scope, $http, activity) {
 
-            $scope.activity = activity;
-            $scope.save = function ($activity) {
-                var putRequest = {
-                    method: 'PUT',
-                    url: 'activity/' + $scope.activity.id,
-                    data: {
-                        text: $scope.activity.text,
-                        tags: $scope.activity.tags,
-                        title: $scope.activity.title,
-                        base64image: $scope.activity.base64image
-                    }
+                $scope.activity = activity;
+                $scope.save = function ($activity) {
+                    var putRequest = {
+                        method: 'PUT',
+                        url: 'activity/' + $scope.activity.id,
+                        data: {
+                            text: $scope.activity.text,
+                            tags: $scope.activity.tags,
+                            title: $scope.activity.title
+                        }
+                    };
+
+                    $http(putRequest).then(function (response) {
+                        $scope.activities = response.data;
+                    }).then(function () {
+                        //todo handle error
+                        $scope.close();
+                    });
                 };
 
-                $http(putRequest).then(function (response) {
-                    $scope.activities = response.data;
-                }).then(function () {
-                    //todo handle error
-                    $scope.close();
-                });
-            };
+                $scope.close = function () {
+                    loadActivities($scope, $http);
+                    // dialog.close();
+                };
+            });
 
-            $scope.close = function () {
-                loadActivities($scope, $http);
-                // dialog.close();
-            };
-        });
+            app.directive('tagManager', function () {
+                return {
+                    restrict: 'E',
+                    scope: {tags: '='},
+                    template:
+                    '<div class="tags">' +
+                    '<button ng-repeat="(idx, tag) in tags" class="btn btn-default" ng-click="removeTag(idx)" style="margin-bottom: 5px;">{{tag}} &times;</button>' +
+                    '</div>' +
+                    '<br>' +
+                    '<input ng-model="new_value" type="text" class="form-control" placeholder="Add a tag..." style="width: 50%; float: left;"/>' +
+                    '<button type="button" class="btn btn-default" ng-click="addTag()" style="margin-left: 5px;">Add</button>',
+                    link: function ($scope, $element) {
+                        // FIXME: this is lazy and error-prone
+                        var input = angular.element($element.children()[1]);
 
-        app.directive('tagManager', function () {
-            return {
-                restrict: 'E',
-                scope: {tags: '='},
-                template:
-                '<div class="tags">' +
-                '<button ng-repeat="(idx, tag) in tags" class="btn btn-default" ng-click="removeTag(idx)" style="margin-bottom: 5px;">{{tag}} &times;</button>' +
-                '</div>' +
-                '<br>' +
-                '<input ng-model="new_value" type="text" class="form-control" placeholder="Add a tag..." style="width: 50%; float: left;"/>' +
-                '<button type="button" class="btn btn-default" ng-click="addTag()" style="margin-left: 5px;">Add</button>',
-                link: function ($scope, $element) {
-                    // FIXME: this is lazy and error-prone
-                    var input = angular.element($element.children()[1]);
+                        // This adds the new tag to the tags array
+                        $scope.addTag = function () {
+                            $scope.tags.push($scope.new_value);
+                            $scope.new_value = "";
+                        };
 
-                    // This adds the new tag to the tags array
-                    $scope.addTag = function () {
-                        $scope.tags.push($scope.new_value);
-                        $scope.new_value = "";
-                    };
+                        // This is the ng-click handler to remove an item
+                        $scope.removeTag = function (idx) {
+                            $scope.tags.splice(idx, 1);
+                        };
 
-                    // This is the ng-click handler to remove an item
-                    $scope.removeTag = function (idx) {
-                        $scope.tags.splice(idx, 1);
-                    };
+                        // Capture all keypresses
+                        input.bind('keypress', function (event) {
+                            // But we only care when Enter was pressed
+                            if (event.keyCode == 13) {
+                                // There's probably a better way to handle this...
+                                $scope.$apply($scope.addTag);
+                            }
+                        });
+                    }
+                };
+            });
 
-                    // Capture all keypresses
-                    input.bind('keypress', function (event) {
-                        // But we only care when Enter was pressed
-                        if (event.keyCode == 13) {
-                            // There's probably a better way to handle this...
-                            $scope.$apply($scope.addTag);
-                        }
-                    });
-                }
-            };
-        });
     </script>
 
     <script>
@@ -209,6 +208,39 @@
             });
         });
     </script>
+    <script>
+        function decodeBase64Image(dataString) {
+            var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+                response = {};
+
+            if (matches.length !== 3) {
+                return new Error('Invalid input string');
+            }
+
+            response.type = matches[1];
+            response.data = new Buffer(matches[2], 'base64');
+
+            return response;
+        }
+
+        function convertImgToBase64(url, callback) {
+            var img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                var canvas = document.createElement('CANVAS');
+                var ctx = canvas.getContext('2d');
+                canvas.height = this.height;
+                canvas.width = this.width;
+                ctx.drawImage(this, 0, 0);
+                var dataURL = canvas.toDataURL('image/png');
+                callback(dataURL);
+                canvas = null;
+            };
+            img.src = url;
+            return img.src;
+        };
+    </script>
+</head>
 </head>
 <body>
 
@@ -265,7 +297,7 @@
                         <div class="col col-sm col-lg">
                             <h2>{{activity.title}}</h2>
                             <p>{{activity.text}}</p>
-                            <p>{{activity.image}}</p>
+                            <p>{{decodeBase64Image(activity.image)}}</p>
                             <div>
                                 <a ng-repeat="tag in activity.tags">#{{tag.tag}} </a>
                             </div>

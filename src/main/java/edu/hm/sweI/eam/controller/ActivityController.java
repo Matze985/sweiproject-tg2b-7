@@ -64,7 +64,7 @@ public class ActivityController {
         });
 
         input.getTags().forEach(LOGGER::info);
-        return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle()));
+        return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle(), input.getBase64Image()));
     }
 
     @DeleteMapping("{id}")
@@ -81,6 +81,7 @@ public class ActivityController {
             activity.setText(input.getText());
             activity.setTags(input.getTags());
             activity.setTitle(input.getTitle());
+            activity.setBase64Image(input.getBase64Image());
             return activityRepository.save(activity);
         }
     }

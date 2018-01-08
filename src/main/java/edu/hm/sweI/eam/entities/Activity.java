@@ -32,6 +32,8 @@ public class Activity implements Comparable<Activity> {
 
     @Column(length = 128)
     private String title;
+    @Column(length = 1000000)
+    private String base64Image;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
@@ -41,10 +43,11 @@ public class Activity implements Comparable<Activity> {
     public Activity() {
     }
 
-    public Activity(String text, List<Tag> tags, String title) {
+    public Activity(String text, List<Tag> tags, String title, String base64Image) {
         this.text = text;
         this.tags = tags;
         this.title = title;
+        this.base64Image = base64Image;
     }
 
     @PrePersist
@@ -87,6 +90,14 @@ public class Activity implements Comparable<Activity> {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 
     public Date getCreated() {
