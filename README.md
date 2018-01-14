@@ -17,10 +17,24 @@ Current Quality State:
 |[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/api/badges/gate?key=org.springframework:eam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
 
 
+# Systemidee
+
+### Problem:
+Aufbau von Bewusstsein über die geförderte strategische Partnerschaft zwischen der Hochschule München und der California Polytechnic State University. 
+
+### Vision:
+Zentrale Online-Plattform zur Bereitstellung und zum Austausch von Informationen über gemeinsame Projekte.
+
+### Hauptanforderungen:
+Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu stärken. Die Basisfunktionen umfassen:
+* Aktivität publizieren
+* Aktivitäten visualisieren
+* Kontaktaufnahme
+* Abonnieren
+* Grafische Auswertung
+
+
+
 -----
 For more information have a look at the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
-
-*This repository is a fork of [gs-rest-service](https://github.com/spring-guides/gs-rest-service). 
-The original content of the README is available [here](https://github.com/sweIhm/sweiproject-tg2b-7/blob/master/doc/archive/README.adoc).*
-
 ----
