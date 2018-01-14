@@ -24,10 +24,6 @@ public class Activity implements Comparable<Activity> {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable
     @JsonIgnoreProperties("activities")
-//            (name = "Activity_Tag",
-//            joinColumns = {@JoinColumn(name = "activity_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")}
-//    )
     private List<Tag> tags = new ArrayList<>();
 
     @Column(length = 128)
