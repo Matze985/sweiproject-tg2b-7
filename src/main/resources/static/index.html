@@ -59,15 +59,21 @@
                 templateUrl: './activityEdit.html'
             };
             $scope.edit = function (activity) {
-                // $dialog.dialog(angular.extend(editDialogOptions, {resolve: {activity: angular.copy(activity)}})).open().then(function () {
-                //     loadActivities($scope, $http);
-                // });
+                console.log("open EditActivity modal");
+                var modal = $uibModal.open({
+                    controller: 'EditActivityCtrl',
+                    templateUrl: './activityEdit.html',
+                    resolve: {activity: angular.copy(activity)}
+                });
+                modal.result.then(function (value) {
+                    loadActivities($scope, $http)
+                });
             };
 
             $scope.delete = function (activity) {
                 var deleteRequest = {
                     method: 'DELETE',
-                    url: 'activity/' + activity.id
+                    url: 'api/activity/' + activity.id
                 };
 
                 $http(deleteRequest).then(function () {
@@ -133,30 +139,60 @@
             // //     }
             // // });
         });
-        app.controller('EditActivityCtrl', function ($scope, $http, activity) {
-
+        app.controller('EditActivityCtrl', function ($uibModalInstance, $scope, $http, activity) {
+            $scope.tags = [];
+            angular.forEach(activity.tags, function (tag) {
+                this.push(tag.tag)
+            }, $scope.tags);
             $scope.activity = activity;
-            $scope.save = function ($activity) {
-                var putRequest = {
-                    method: 'PUT',
-                    url: 'activity/' + $scope.activity.id,
-                    data: {
-                        text: $scope.activity.text,
-                        tags: $scope.activity.tags,
-                        title: $scope.activity.title
-                    }
-                };
+            $scope.save = function ($activity, mail) {
+                console.log("editSave function called");
 
-                $http(putRequest).then(function (response) {
-                    $scope.activities = response.data;
-                }).then(function () {
-                    //todo handle error
-                    $scope.close();
+                $http({
+                    method: 'POST',
+                    url: 'api/tag',
+                    data: $scope.tags
+                }).then(function (tags) {
+                    $http({
+                        method: 'POST',
+                        url: 'api/activity',
+                        data: {
+                            id: $scope.activity.id,
+                            text: $scope.activity.text,
+                            tags: tags.data,
+                            title: $scope.activity.title
+                        }
+                    }).then(function (response) {
+                        $scope.activity = response.data;
+                    }).then($http({
+                        method: 'POST',
+                        url: 'api/mailAddress',
+                        data: mail
+                    })).then(function () {
+                        $scope.close();
+                    });
                 });
+                // var putRequest = {
+                //     method: 'PUT',
+                //     url: 'activity/' + $scope.activity.id,
+                //     data: {
+                //         text: $scope.activity.text,
+                //         tags: $scope.activity.tags,
+                //         title: $scope.activity.title
+                //     }
+                // };
+                //
+                // $http(putRequest).then(function (response) {
+                //     $scope.activities = response.data;
+                // }).then(function () {
+                //     //todo handle error
+                //     $scope.close();
+                // });
             };
 
             $scope.close = function () {
-                loadActivities($scope, $http);
+                $uibModalInstance.close();
+                // loadActivities($scope, $http);
                 // dialog.close();
             };
         });
@@ -272,8 +308,8 @@
                             </div>
 
                             <p>
-                                <button class="btn btn-default" ng-click="edit(activity)" disabled>edit</button>
-                                <button class="btn btn-default" ng-click="delete(activity)" disabled>delete</button>
+                                <button class="btn btn-default" ng-click="edit(activity)">edit</button>
+                                <button class="btn btn-default" ng-click="delete(activity)">delete</button>
                             </p>
                         </div>
                     </div>

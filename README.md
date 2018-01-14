@@ -10,6 +10,13 @@ Current Build States:
 |[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://travis-ci.org/sweIhm/sweiproject-tg2b-7.svg?branch=master)](https://travis-ci.org/sweIhm/sweiproject-tg2b-7)
 |[develop](https://github.com/sweIhm/sweiproject-tg2b-7/tree/develop)|[![Build Status](https://travis-ci.org/sweIhm/sweiproject-tg2b-7.svg?branch=develop)](https://travis-ci.org/sweIhm/sweiproject-tg2b-7)
 
+Current Quality State:
+
+|branch|state|
+|------|:-------------|
+|[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
+
+
 -----
 For more information have a look at the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
 

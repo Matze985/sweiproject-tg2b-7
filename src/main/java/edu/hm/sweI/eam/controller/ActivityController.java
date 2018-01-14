@@ -64,24 +64,19 @@ public class ActivityController {
         });
 
         input.getTags().forEach(LOGGER::info);
-        return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle()));
+        if (input.getId() != null) {
+            Activity activity = activityRepository.findOne(input.getId());
+            activity.setText(input.getText());
+            activity.setTags(input.getTags());
+            activity.setTitle(input.getTitle());
+            return activityRepository.save(activity);
+        } else {
+            return activityRepository.save(new Activity(input.getText(), input.getTags(), input.getTitle()));
+        }
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         activityRepository.delete(id);
-    }
-
-    @PutMapping("{id}")
-    public Activity update(@PathVariable Long id, @RequestBody Activity input) {
-        Activity activity = activityRepository.findOne(id);
-        if (activity == null) {
-            return null;
-        } else {
-            activity.setText(input.getText());
-            activity.setTags(input.getTags());
-            activity.setTitle(input.getTitle());
-            return activityRepository.save(activity);
-        }
     }
 }
