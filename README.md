@@ -1,4 +1,4 @@
-# Welcome to the EAM project
+# Welcome to the EAM project GH Page
 
 The deployed application is available at: https://tg2b-7.herokuapp.com/<br>
 The current deployed application in **develop** state is available at: https://eam-dev.herokuapp.com/
