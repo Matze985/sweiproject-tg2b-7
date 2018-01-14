@@ -67,7 +67,7 @@
             $scope.delete = function (activity) {
                 var deleteRequest = {
                     method: 'DELETE',
-                    url: 'activity/' + activity.id
+                    url: 'api/activity/' + activity.id
                 };
 
                 $http(deleteRequest).then(function () {
@@ -273,7 +273,7 @@
 
                             <p>
                                 <button class="btn btn-default" ng-click="edit(activity)" disabled>edit</button>
-                                <button class="btn btn-default" ng-click="delete(activity)" disabled>delete</button>
+                                <button class="btn btn-default" ng-click="delete(activity)">delete</button>
                             </p>
                         </div>
                     </div>
