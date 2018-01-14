@@ -14,7 +14,7 @@ Current Quality State:
 
 |branch|state|
 |------|:-------------|
-|[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
+|[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/api/badges/gate?key=org.springframework:eam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
 
 
 -----
