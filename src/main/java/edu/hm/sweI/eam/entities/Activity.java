@@ -47,6 +47,13 @@ public class Activity implements Comparable<Activity> {
         this.title = title;
     }
 
+    public Activity(Long id, String text, List<Tag> tags, String title) {
+        this.id = id;
+        this.text = text;
+        this.tags = tags;
+        this.title = title;
+    }
+
     @PrePersist
     protected void onCreate() {
         created = new Date();
