@@ -1,6 +1,6 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.swe.eam.controller;
 
-import edu.hm.sweI.eam.entities.Tag;
+import edu.hm.swe.eam.entities.Tag;
 import org.springframework.data.repository.CrudRepository;
 
 /**

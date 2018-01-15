@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.swe.eam.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 
-import static edu.hm.sweI.eam.Constants.API_BASE;
+import static edu.hm.swe.eam.Constants.API_BASE;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -52,6 +53,32 @@ public class ActivityControllerTest {
                 .getResponse();
 
         int id = extractID(response);
+        mockMvc.perform(delete(API_BASE + "/activity/" + id));
+    }
+
+    @Test
+    public void updateActivity() throws Exception {
+        MockHttpServletResponse response = this.mockMvc.perform(
+                post(API_BASE + "/activity")
+                        .content("{\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        int id = extractID(response);
+        MockHttpServletResponse responseUpdate = this.mockMvc.perform(
+                post(API_BASE + "/activity")
+                        .content("{\"id\":\"" + id + "\",\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+        int idUpdate = extractID(responseUpdate);
+        assertEquals(id, idUpdate);
+
         mockMvc.perform(delete(API_BASE + "/activity/" + id));
     }
 

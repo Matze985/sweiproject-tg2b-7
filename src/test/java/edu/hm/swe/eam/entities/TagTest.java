@@ -1,6 +1,6 @@
-package edu.hm.sweI.eam.entities;
+package edu.hm.swe.eam.entities;
 
-import edu.hm.sweI.eam.BaseEqualsHashCodeTest;
+import edu.hm.swe.eam.BaseEqualsHashCodeTest;
 import org.junit.Test;
 
 import java.util.ArrayList;

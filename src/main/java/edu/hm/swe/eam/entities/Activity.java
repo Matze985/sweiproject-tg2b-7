@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam.entities;
+package edu.hm.swe.eam.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
