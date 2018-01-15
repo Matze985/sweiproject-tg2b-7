@@ -19,13 +19,13 @@ Current Quality State:
 
 # Systemidee
 
-### Problem:
+## Problem:
 Aufbau von Bewusstsein über die gefoerderte strategische Partnerschaft zwischen der Hochschule Muenchen und der California Polytechnic State University. 
 
-### Vision:
+## Vision:
 Zentrale Online-Plattform zur Bereitstellung und zum Austausch von Informationen über gemeinsame Projekte.
 
-### Hauptanforderungen:
+## Hauptanforderungen:
 Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu staerken. Die Basisfunktionen umfassen:
 * Aktivitaet publizieren
 * Aktivitaeten visualisieren
