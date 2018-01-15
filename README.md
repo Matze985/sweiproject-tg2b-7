@@ -35,11 +35,11 @@ Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu s
 
 # Fachklassen:
 
-![Fachklassenmodell konnte nicht geladen werden!](/doc/images/Fachklassenmodell.png)
+![Fachklassenmodell konnte nicht geladen werden!](/doc/images/Klassendiagramm.png)
 
 # Beispiel Kontakt aufnehmen:
 
-![Fachklassenmodell konnte nicht geladen werden!](/doc/images/Sequenzdia_mail.jpg)
+![Sequenzdiagramm konnte nicht geladen werden!](/doc/images/Sequenzdia_mail.jpg)
 
 -----
 For more information have a look at the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
