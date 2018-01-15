@@ -33,7 +33,9 @@ Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu s
 * Abonnieren
 * Grafische Auswertung
 
+##Kontakt
 
+![Anwendungsfalldiagramm konnte nicht geladen werden!](https://github.com/sweIhm/sweiproject-tg2b-7/blob/master/doc/images/Sequenzdia_mail.jpg)
 
 -----
 For more information have a look at the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
