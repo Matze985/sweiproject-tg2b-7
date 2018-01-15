@@ -1,7 +1,7 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.swe.eam.controller;
 
-import edu.hm.sweI.eam.entities.Activity;
-import edu.hm.sweI.eam.entities.Tag;
+import edu.hm.swe.eam.entities.Activity;
+import edu.hm.swe.eam.entities.Tag;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static edu.hm.sweI.eam.Constants.API_BASE;
+import static edu.hm.swe.eam.Constants.API_BASE;
 
 interface ActivityRepository extends CrudRepository<Activity, Long> {
 }

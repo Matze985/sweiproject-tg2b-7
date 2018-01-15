@@ -1,6 +1,6 @@
-package edu.hm.sweI.eam.mail;
+package edu.hm.swe.eam.mail;
 
-import edu.hm.sweI.eam.BaseEqualsHashCodeTest;
+import edu.hm.swe.eam.BaseEqualsHashCodeTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

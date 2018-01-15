@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam;
+package edu.hm.swe.eam;
 
 import org.junit.Test;
 

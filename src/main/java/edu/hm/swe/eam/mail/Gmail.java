@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam.mail;
+package edu.hm.swe.eam.mail;
 
 
 import org.apache.log4j.LogManager;

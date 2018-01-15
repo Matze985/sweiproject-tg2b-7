@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam;
+package edu.hm.swe.eam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

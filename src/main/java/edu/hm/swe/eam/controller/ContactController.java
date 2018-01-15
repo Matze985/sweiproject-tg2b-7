@@ -1,6 +1,6 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.swe.eam.controller;
 
-import edu.hm.sweI.eam.mail.Gmail;
+import edu.hm.swe.eam.mail.Gmail;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;

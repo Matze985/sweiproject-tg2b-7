@@ -1,4 +1,4 @@
-package edu.hm.sweI.eam.controller;
+package edu.hm.swe.eam.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 
-import static edu.hm.sweI.eam.Constants.API_BASE;
+import static edu.hm.swe.eam.Constants.API_BASE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
