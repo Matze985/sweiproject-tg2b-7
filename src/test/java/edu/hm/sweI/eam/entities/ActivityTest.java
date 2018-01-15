@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,6 +23,31 @@ public class ActivityTest extends BaseEqualsHashCodeTest<Activity> {
                     return activity;
                 },
                 new Activity("diffText", new ArrayList<>(), "diffTitle"));
+    }
+
+    @Test
+    public void createActivityWithIDCreatesActivityCorrectly(){
+        Activity activity = new Activity(200L, "text", new ArrayList<>(), "title");
+        assertEquals(new Long(200), activity.getId());
+        assertEquals("text", activity.getText());
+        assertEquals("title", activity.getTitle());
+        assertEquals("title", activity.getTitle());
+    }
+
+    @Test
+    public void setCreatedSetsCreatedCorrectly(){
+        Activity activity = new Activity();
+        Date date = new Date();
+        activity.setCreated(date);
+        assertEquals(date, activity.getCreated());
+    }
+
+    @Test
+    public void setUpdatedSetsUpdatedCorrectly(){
+        Activity activity = new Activity();
+        Date date = new Date();
+        activity.setUpdated(date);
+        assertEquals(date, activity.getUpdated());
     }
 
     @Test
