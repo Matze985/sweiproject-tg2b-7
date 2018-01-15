@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static edu.hm.swe.eam.Constants.API_BASE;
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ActivityControllerTest {
 
-    private String testActivityName = "TestActivity923478523940237529304";
+    private String testActivityName = "TestActivity" + UUID.randomUUID();
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,9 +59,17 @@ public class ActivityControllerTest {
 
     @Test
     public void addActivityWithTag() throws Exception {
+        String testTag = "testTag9081234789024";
+        this.mockMvc.perform(
+                post(API_BASE + "/tag")
+                        .content("[\"" + testTag + "\"]")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+
         MockHttpServletResponse response = this.mockMvc.perform(
                 post(API_BASE + "/activity")
-                        .content("{\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[\"testTag9081234789024\"]}")
+                        .content("{\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[\"" + testTag + "\"]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk())
