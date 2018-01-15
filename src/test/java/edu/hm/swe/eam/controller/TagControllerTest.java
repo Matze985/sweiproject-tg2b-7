@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.UUID;
+
 import static edu.hm.swe.eam.Constants.API_BASE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -23,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TagControllerTest {
-    private String testTag = "tag12372934875823458709";
+    private String testTag = "tag" + UUID.randomUUID();
     @Autowired
     private MockMvc mockMvc;
 
@@ -34,6 +36,24 @@ public class TagControllerTest {
 
     @Test
     public void addTag() throws Exception {
+        this.mockMvc.perform(
+                post(API_BASE + "/tag")
+                        .content("[\"" + testTag + "\"]")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    public void updateTag() throws Exception {
+        this.mockMvc.perform(
+                post(API_BASE + "/tag")
+                        .content("[\"" + testTag + "\"]")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+
         this.mockMvc.perform(
                 post(API_BASE + "/tag")
                         .content("[\"" + testTag + "\"]")
