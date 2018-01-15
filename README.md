@@ -1,7 +1,7 @@
 # Welcome to the EAM project GH Page
 
-The deployed application is available at: https://tg2b-7.herokuapp.com/<br>
-The current deployed application in **develop** state is available at: https://eam-dev.herokuapp.com/
+The deployed application is available at: [EAM](https://tg2b-7.herokuapp.com/)<br>
+The current deployed application in **develop** state is available at: [EAM Develop](https://eam-dev.herokuapp.com/)
 
 Current Build States:
 
@@ -20,15 +20,15 @@ Current Quality State:
 # Systemidee
 
 ### Problem:
-Aufbau von Bewusstsein über die geförderte strategische Partnerschaft zwischen der Hochschule München und der California Polytechnic State University. 
+Aufbau von Bewusstsein über die gefoerderte strategische Partnerschaft zwischen der Hochschule Muenchen und der California Polytechnic State University. 
 
 ### Vision:
 Zentrale Online-Plattform zur Bereitstellung und zum Austausch von Informationen über gemeinsame Projekte.
 
 ### Hauptanforderungen:
-Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu stärken. Die Basisfunktionen umfassen:
-* Aktivität publizieren
-* Aktivitäten visualisieren
+Benutzerfreundlichkeit und ansprechender Aufbau um das Interesse der Nutzer zu staerken. Die Basisfunktionen umfassen:
+* Aktivitaet publizieren
+* Aktivitaeten visualisieren
 * Kontaktaufnahme
 * Abonnieren
 * Grafische Auswertung
