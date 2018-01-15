@@ -1,7 +1,7 @@
 # Welcome to the EAM project
 
-The deployed application is available at: https://tg2b-7.herokuapp.com/<br>
-The current deployed application in **develop** state is available at: https://eam-dev.herokuapp.com/
+The deployed application is available at: [EAM](https://tg2b-7.herokuapp.com/)<br>
+The current deployed application in **develop** state is available at: [EAM Develop](https://eam-dev.herokuapp.com/)
 
 Current Build States:
 
@@ -14,13 +14,9 @@ Current Quality State:
 
 |branch|state|
 |------|:-------------|
-|[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
+|[master](https://github.com/sweIhm/sweiproject-tg2b-7/tree/master)|[![Build Status](https://sonarcloud.io/api/badges/gate?key=org.springframework:eam_tg2b-7)](https://sonarcloud.io/dashboard?id=org.springframework%3Aeam_tg2b-7)
 
 
 -----
-For more information have a look at the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
-
-*This repository is a fork of [gs-rest-service](https://github.com/spring-guides/gs-rest-service). 
-The original content of the README is available [here](https://github.com/sweIhm/sweiproject-tg2b-7/blob/master/doc/archive/README.adoc).*
-
+For more information have a look at our [Github Page](https://sweihm.github.io/sweiproject-tg2b-7/) or the [Projekt-Wiki](https://github.com/sweIhm/sweiproject-tg2b-7/wiki).
 ----
