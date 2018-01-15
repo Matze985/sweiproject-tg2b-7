@@ -57,6 +57,21 @@ public class ActivityControllerTest {
     }
 
     @Test
+    public void addActivityWithTag() throws Exception {
+        MockHttpServletResponse response = this.mockMvc.perform(
+                post(API_BASE + "/activity")
+                        .content("{\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[\"testTag9081234789024\"]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        int id = extractID(response);
+        mockMvc.perform(delete(API_BASE + "/activity/" + id));
+    }
+
+    @Test
     public void updateActivity() throws Exception {
         MockHttpServletResponse response = this.mockMvc.perform(
                 post(API_BASE + "/activity")
@@ -79,6 +94,24 @@ public class ActivityControllerTest {
         int idUpdate = extractID(responseUpdate);
         assertEquals(id, idUpdate);
 
+        mockMvc.perform(delete(API_BASE + "/activity/" + id));
+    }
+
+    @Test
+    public void findActivity() throws Exception {
+        MockHttpServletResponse response = this.mockMvc.perform(
+                post(API_BASE + "/activity")
+                        .content("{\"title\":\"" + testActivityName + "\",\"text\":\"test test\",\"tags\":[]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        int id = extractID(response);
+        MockHttpServletResponse responseFind = mockMvc.perform(get(API_BASE + "/activity/" + id)).andReturn().getResponse();
+        int findId = extractID(responseFind);
+        assertEquals(id, findId);
         mockMvc.perform(delete(API_BASE + "/activity/" + id));
     }
 

@@ -41,4 +41,22 @@ public class TagControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+
+    @Test
+    public void updateTag() throws Exception {
+        this.mockMvc.perform(
+                post(API_BASE + "/tag")
+                        .content("[\"" + testTag + "\"]")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(
+                post(API_BASE + "/tag")
+                        .content("[\"" + testTag + "\"]")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
